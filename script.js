@@ -52,19 +52,33 @@ function lightMode() {
 }
 // switch theme dynamically
 function switchTheme(event) {
-  console.log(event);
   if (event.target.checked) {
     // enable dark theme in html
     html.setAttribute("data-theme", "dark");
 
     // change styling to dark
     darkMode();
-    // change icons
+
+    // save it theme local storage
+    localStorage.setItem("theme", "dark");
   } else {
     html.setAttribute("data-theme", "light");
     lightMode();
+
+    // save it theme local storage
+    localStorage.setItem("theme", "light");
   }
 }
 
 // event listener
 toggleSwitch.addEventListener("change", switchTheme);
+
+// on load
+const initialTheme = localStorage.getItem("theme");
+if (initialTheme == "dark") {
+  toggleSwitch.checked = true;
+  toggleSwitch.dispatchEvent(new Event("change"));
+} else {
+  toggleSwitch.checked = false;
+  toggleSwitch.dispatchEvent(new Event("change"));
+}
