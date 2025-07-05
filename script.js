@@ -11,8 +11,13 @@ const html = document.documentElement;
 
 // change image mode
 function toggleImageMode(img, isLight) {
-  if (isLight) img.src = img.src.replace("light", "dark");
-  else img.src = img.src.replace("dark", "light");
+  const file = img.src.split("/").pop(); // Get filename only
+
+  const newFile = isLight
+    ? file.replace("light", "dark")
+    : file.replace("dark", "light");
+
+  img.src = img.src.replace(file, newFile);
 }
 
 // change style to darktheme
